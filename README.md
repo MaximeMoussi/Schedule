@@ -59,7 +59,90 @@ General Idea : the choice of the stack can be changed as long as each class impl
 - StaffManager : use pandas and apply permanent modification of dfs, reconciliation (change of name, ghost worker, new worker)
 - Optimizer : use Pulp and return the optimal assignement
 - ReportingManager : collect all the results
-- UiManager : use FreeSimpleUI and handle collection of new datas 
+- UiManager : use FreeSimpleUI and handle collection of new datas
+
+
+```mermaid
+flowchart TD
+
+
+Upload((fa:fa-file-csv User updates<br/>availability.csv)) -.-> Start([Start Program])
+
+
+Start --> DB_Init[Initialize DBManager]
+Start --> UI_Init[Initialize UIManager]
+
+subgraph DBLayer ["DBManager Operations Pipeline"]
+    DB_Init --> Load[Load CSV Files]
+    Load --> NewCheck{New Workers?}
+    
+    %% Path 1: Worker Sync
+    NewCheck -- Yes --> AskNew[[UI: Request Attributes]]
+    AskNew --> SyncDB[(Update staff_register.csv)]
+    SyncDB --> GhostCheck
+    NewCheck -- No --> GhostCheck{Ghost Workers?}
+
+    %% Path 2: Ghost Cleanup
+    GhostCheck -- Yes --> AskGhost[[UI: Confirm Deletion]]
+    AskGhost -- Yes --> SyncDB2[(Update staff_register.csv)]
+    AskGhost -- No --> NameCheck
+    SyncDB2 --> NameCheck{Name Changes?}
+    GhostCheck -- No --> NameCheck
+    
+    %% Path 3: Name Sync
+    NameCheck -- Yes --> SyncDB3[(Update staff_register.csv)]
+    NameCheck -- No --> DemandCheck
+    SyncDB3 --> DemandCheck{UI: Edit Demand?}
+
+    %% Path 4: Demand Edit (Now inside DB Manager)
+    DemandCheck -- Yes --> EditDemand[(Modify need_for_staff.csv)]
+    EditDemand --> ReadyToSolve
+    DemandCheck -- No --> ReadyToSolve
+end
+
+subgraph UILayer ["UIManager"]
+    UI_Init -.-> NewCheck
+    
+    %% UI components called by the DB Pipeline
+    AskNew -.-> GUI_Form[GUI: Entry Form]
+    AskGhost -.-> GUI_Dialog[GUI: Yes/No Dialog]
+    DemandCheck -.-> GUI_Edit[GUI: Demand Editor]
+end
+
+subgraph OptimizerLayer ["OptimizerManager"]
+    ReadyToSolve --> Opti_Init[Initialize OptimizerManager] 
+    Opti_Init[Initialize OptimizerManager] --> Setup[Build Math Model]
+    Setup --> Solve[Pulp / Gurobi Solve]
+end
+
+subgraph ReportingLayer ["ReportingManager"]
+    Solve --> Reportinit[Initialize ReportingManager] 
+    Reportinit --> Generate[Export Results]
+    Generate --> Save[Save to /outputs]
+end
+
+Save --> End([End Program])
+
+style DBLayer fill:#fafafa,stroke:#333,stroke-width:2px
+style UILayer fill:#e3f2fd,stroke:#1565c0,stroke-width:2px
+style OptimizerLayer fill:#fff3e0,stroke:#ef6c00,stroke-width:2px
+style ReportingLayer fill:#e8f5e9,stroke:#2e7d32,stroke-width:2px
+
+style SyncDB fill:#fff9c4,stroke:#fbc02d,stroke-width:1px
+style SyncDB2 fill:#fff9c4,stroke:#fbc02d,stroke-width:1px
+style SyncDB3 fill:#fff9c4,stroke:#fbc02d,stroke-width:1px
+style EditDemand fill:#fff9c4,stroke:#fbc02d,stroke-width:1px
+
+style NewCheck fill:#ffebee,stroke:#c62828
+style GhostCheck fill:#ffebee,stroke:#c62828
+style NameCheck fill:#ffebee,stroke:#c62828
+style DemandCheck fill:#ffebee,stroke:#c62828
+```
+Few Comments about the current pipeline : 
+
+- **Automation** : As "staff_availibility.csv" is based on template from google forms export csv the whole pipeline can be automate using google api for upload result from the form and launch a new form.
+- **GUI** : While operationnal using FreeSimpleGui is not the more convenient for user interface and visualization fo dataframe like staff_register or demand. Typically, an interface based on Html and CSS will be more handy.
+- **Feedback loop from user** : What is currently missing is a feedback loops with the user about the proposed solutions handle by the **ReportingManager** class. 
 
 ## Running the Project 
 ```
