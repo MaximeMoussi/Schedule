@@ -89,10 +89,27 @@ A report of eventual errors, modification of db and various information about th
 ### src : 
 
 General Idea : the choice of the stack can be changed as long as each class implement the same API (function and report type)
-- StaffManager : use pandas and apply permanent modification of dfs, reconciliation (change of name, ghost worker, new worker)
-- Optimizer : use Pulp and return the optimal assignement
-- ReportingManager : collect all the results
-- UiManager : use FreeSimpleUI and handle collection of new datas
+
+---
+
+**DBManager**
+- Tech : Pandas
+- Responsability : Handle **Reconciliation Process** i.e detect ghost workers / detect new workers / apply permanent change to staff_register.csv or temporary change to need_for_staff.csv
+    
+---
+**UiManager** 
+- Tech : FreeSimpleUI
+- Responsability : Handle **User Interaction** i.e collect data from user (modification , supression and infos)
+
+---
+**OptimizerManager** 
+- Tech : Pulp
+- Responsability: **Solve** the problem
+
+---
+**ReportingManager**
+- Tech : pandas, matplotlib
+- Responsability: **Report** the result of the app
 
 
 ```mermaid
@@ -134,12 +151,12 @@ subgraph DBLayer ["DBManager Operations Pipeline"]
 end
 
 subgraph UILayer ["UIManager"]
-    UI_Init -.-> NewCheck
+    UI_Init 
     
     %% UI components called by the DB Pipeline
-    AskNew -.-> GUI_Form[GUI: Entry Form]
-    AskGhost -.-> GUI_Dialog[GUI: Yes/No Dialog]
-    DemandCheck -.-> GUI_Edit[GUI: Demand Editor]
+    AskNew <-.-> GUI_Form[GUI: Entry Form]
+    AskGhost <-.-> GUI_Dialog[GUI: Yes/No Dialog]
+    DemandCheck <-.-> GUI_Edit[GUI: Demand Editor]
 end
 
 subgraph OptimizerLayer ["OptimizerManager"]
