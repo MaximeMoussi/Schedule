@@ -8,7 +8,7 @@ The system models staff availability, role requirements, operational constraints
 ## Mathematical Formulation
 ![Mathematical Formulation](https://github.com/MaximeMoussi/Schedule/blob/main/Mathprog.png)
 ---
-**General Idea** : In order to avoid infeasability issue we penalize the objective using slack varaibles. The Slack variables are then used in the Shortage_Report.txt
+**General Idea** : In order to avoid infeasability issue we penalize the objective using slack varaibles. The Slack variables are then reported in the Shortage_Report.txt
 - **Other constraints** :The problem is fairly simple but the business case didn't need any other type of constraint such as Incompatibility between two workers, minimum time between two shifts etc ... 
 - **Other objectives** : A weighting schema will accentuate the priority over different type of shortage. Also, we can include a fairness constraint between the different workers based on various criteria (the worker the more available have priority, the assignement need to minimize the STD between workers etc... )
  
