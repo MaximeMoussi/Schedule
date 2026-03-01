@@ -221,8 +221,8 @@ python -m PyInstaller --noconfirm --onedir --windowed --name "Staff_Scheduler" -
 ```
 
 ## Future Improvements 
- 1 - New type of Optimizer : BIP is not the only possible way to solve the problem in an exact manner (ex: CP). Also, for larger problem with more constraints and/or more ppl excat approach will become untractable thus the implementation of approximate algorithm such as Grasp algorithm will be nice. 
+- **UI and FeedbackLoop** : Switch this simple pratical UI to something nicer and more user friendly that will implement a **feedback loop**.
+- **Add Unit Test** 
+- **Benchmark performance** : Observe the growth of the solving time in function of the size of the input (Number of workers, Number of shifts) 
+- **New type of Optimizer** : BIP is not the only possible way to solve the problem in an exact manner (ex: CP). Also, **for larger problem** with more constraints and/or more workers excat approach will become untractable thus the implementation of **approximate algorithm** such as Grasp algorithm will ensure robustness of the pipeline. 
  
- 3 - Testing : while we catch the errors in the logger, the most clean way to do will be to add Unit test
- 
- 4 - UI : Switch this simple pratical UI to something nicer and more user friendly.
