@@ -7,6 +7,14 @@ The system models staff availability, role requirements, operational constraints
 
 ## Mathematical Formulation
 ![Mathematical Formulation](https://github.com/MaximeMoussi/Schedule/blob/main/Mathprog.png)
+---
+**General Idea** : In order to avoid infeasability issue we penalize the objective using slack varaibles. The Slack variables are then used in the Shortage_Report.txt
+- **Other constraints** :The problem is fairly simple but the business case didn't need any other type of constraint such as Incompatibility between two workers, minimum time between two shifts etc ... 
+- **Other objectives** : A weighting schema will accentuate the priority over different type of shortage. Also, we can include a fairness constraint between the different workers based on various criteria (the worker the more available have priority, the assignement need to minimize the STD between workers etc... )
+ 
+
+
+
 ## Project Structure 
 ```
 ├── config.yaml                # Central configuration file
@@ -20,7 +28,6 @@ The system models staff availability, role requirements, operational constraints
 ├── outputs/                   # Generated outputs
 │   ├── Weekly_Staff_Schedule.xlsx
 │   ├── Weekly_Staff_Schedule.pdf
-│   ├── Proposed_Staff_Schedule.xlsx
 │   └── Shortage_Report.txt
 │
 ├── logs/
@@ -214,12 +221,8 @@ python -m PyInstaller --noconfirm --onedir --windowed --name "Staff_Scheduler" -
 ```
 
 ## Future Improvements 
- 1 - Other constraints are possibles : incompatibility between two woerkers that cannot be scheduled to the same shift
+ 1 - New type of Optimizer : BIP is not the only possible way to solve the problem in an exact manner (ex: CP). Also, for larger problem with more constraints and/or more ppl excat approach will become untractable thus the implementation of approximate algorithm such as Grasp algorithm will be nice. 
  
- 2 - New type of Optimizer : BIP is not the only possible way to solve the problem in an exact manner (ex: CP). Also, for larger problem with more constraints and/or more ppl excat approach will become untractable thus the implementation of approximate algorithm such as Grasp algorithm will be nice. 
+ 3 - Testing : while we catch the errors in the logger, the most clean way to do will be to add Unit test
  
- 3 - Other objectives are possibles : we can add fairness constraint between the different workers based on various criteria (the worker the more available have priority, the assignement need to minimize the STD between workers etc... )
- 
- 4 - Testing : while we catch the errors in the logger, the most clean way to do will be to add Unit test
- 
- 5 - UI : Switch this simple pratical UI to something nicer and more user friendly.
+ 4 - UI : Switch this simple pratical UI to something nicer and more user friendly.
