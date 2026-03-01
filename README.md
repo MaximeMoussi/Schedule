@@ -111,6 +111,7 @@ General Idea : the choice of the stack can be changed as long as each class impl
 - Tech : pandas, matplotlib
 - Responsability: **Report** the result of the app
 
+## Pipeline 
 
 ```mermaid
 flowchart TD
@@ -188,6 +189,7 @@ style GhostCheck fill:#ffebee,stroke:#c62828
 style NameCheck fill:#ffebee,stroke:#c62828
 style DemandCheck fill:#ffebee,stroke:#c62828
 ```
+
 ---
 
 Few Comments about the current pipeline : 
