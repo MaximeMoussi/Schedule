@@ -69,6 +69,13 @@ General Idea : the choice of the stack can be changed as long as each class impl
  4- Running the code : python src/main.py
 ```
 
+## Making a standalone application 
+In order to be used by all type of people, the repo can be make as a standalone application using the following command with pyInstaller : 
+```
+python -m PyInstaller --noconfirm --onedir --windowed --name "Staff_Scheduler" --collect-all pulp --add-data "config.yaml;." --add-data "data;data" --add-data "outputs;outputs" --add-data "logs;logs" main.py
+
+```
+
 ## Future Improvements 
  1 - Other constraints are possibles : incompatibility between two woerkers that cannot be scheduled to the same shift
  
