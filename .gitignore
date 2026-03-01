@@ -1,0 +1,27 @@
+# --- Virtual Environments ---
+.venv/
+venv/
+ENV/
+env/
+
+# --- Python Cache ---
+__pycache__/
+*.py[cod]
+*$py.class
+
+# --- PyInstaller (Build artifacts) ---
+# Hide the folders PyInstaller creates when building an EXE
+build/
+dist/
+*.spec
+
+# --- OS Specific ---
+.DS_Store
+Thumbs.db
+
+# --- Data & Logs (Manager specific) ---
+# We keep the folder structure, but ignore the actual generated reports
+logs/*.log
+
+# --- VS Code ---
+.vscode/
