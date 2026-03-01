@@ -37,23 +37,57 @@ The system models staff availability, role requirements, operational constraints
 
 ### data : 
 
-Code is based on 3 data source : 
-- staff_availability.csv (change weekly based on new availability based on Google form csv format)
-- need_for_staff.csv (template of demand for each shift and each role that can be adapt weekly inside the UI)
-- staff_register.csv (information about each worker that can be adapt weekly inside the UI).  
+The code uses three main CSV files:
 
-The expected data format is checked using the config file that contains the headers of the csv 
+
+#### 1. `need_for_staff.csv`
+
+| Role      | Mon 14h | Mon 18h | Mon 19h | Tue 14h | Tue 18h | Tue 19h | Wed 14h | Wed 18h | Wed 19h | Thu 14h | Thu 18h | Thu 19h | Fri 14h | Fri 18h | Fri 19h | Sat 14h | Sat 18h | Sat 19h | Sun 14h | Sun 18h | Sun 19h |
+|-----------|---------|---------|---------|---------|---------|---------|---------|---------|---------|---------|---------|---------|---------|---------|---------|---------|---------|---------|---------|---------|---------|
+| Waiter    | 1       | 2       | 1       | 1       | 1       | 1       | 1       | 2       | 2       | 1       | 2       | 2       | 2       | 3       | 4       | 2       | 4       | 4       | 1       | 2       | 2       |
+| Bartender | 1       | 1       | 2       | 1       | 1       | 1       | 1       | 1       | 2       | 1       | 2       | 2       | 2       | 2       | 3       | 2       | 3       | 3       | 1       | 1       | 2       |
+
+*Template for staff demand per shift; can be adapted weekly inside the UI.*
+
+
+#### 2. `staff_availability.csv`
+
+| Horodateur          | Name            | Email                     | Monday        | Tuesday   | Wednesday        | Thursday     | Friday       | Saturday       | Sunday   |
+|--------------------|-----------------|---------------------------|---------------|-----------|-----------------|-------------|-------------|---------------|---------|
+| 11/02/2026 14:15:00 | Gordon Ramsay    | gordon.ramsay@example.com | 14h, 18h, 19h | 18h, 19h | 14h, 19h        | 14h, 18h    | 18h, 19h    | 14h, 18h, 19h | 19h     |
+| 11/02/2026 14:15:00 | Anthony Bourdain | anthony.bourdain@example.com | 14h, 18h      |           | 14h, 18h, 19h   | 18h, 19h    | 14h         | 14h, 18h      | 14h     |
+| 11/02/2026 14:15:00 | Jeremy Clarkson  | jeremy.clarkson@example.com | 18h, 19h      | 19h       | 18h             | 18h, 19h    | 14h         | 18h, 19h      | 14h, 18h |
+| 11/02/2026 14:15:00 | Margot Robbie    | margot.robbie@example.com | 14h, 18h, 19h | 14h       | 14h, 18h, 19h   | 14h         | 14h, 18h    | 18h, 19h      | 14h     |
+| 11/02/2026 14:15:00 | Richard Hammond  | richard.hammond@example.com | 19h           | 18h, 19h | 19h             | 18h, 19h    | 19h         | 14h           | 14h, 18h, 19h |
+
+*Weekly staff availability from Google Form CSV.*
+
+
+#### 3. `staff_register.csv`
+
+| Name                  | Role      | Till Authorized | Is Manager | Email                       |
+|----------------------|-----------|----------------|------------|-----------------------------|
+| Gordon Ramsay         | Both      | Yes            | Yes        | gordon.ramsay@example.com   |
+| Anthony Bourdain      | Bartender | Yes            | No         | anthony.bourdain@example.com|
+| Jeremy Clarkson       | Waiter    | No             | No         | jeremy.clarkson@example.com |
+| Richard Hammond       | Waiter    | Yes            | No         | richard.hammond@example.com |
+| Marco Pierre White    | Both      | Yes            | Yes        | marco.pierre.white@example.com |
+
+*Master register of all staff; editable weekly inside the UI.*
+
 
 ### logs : 
 
 A report of eventual errors, modification of db and various information about the eventual bugs. 
 
 ### outputs : 
+
 - Shortage_Report.txt : a simple report with the missing role for each shift.  
 - Weekly_Staff_Schedule.xlsx : final excel schedule.
 - Weekly_Staff_Schedule.pdf : the schedule format to pdf.
 
 ### src : 
+
 General Idea : the choice of the stack can be changed as long as each class implement the same API (function and report type)
 - StaffManager : use pandas and apply permanent modification of dfs, reconciliation (change of name, ghost worker, new worker)
 - Optimizer : use Pulp and return the optimal assignement
@@ -137,6 +171,8 @@ style GhostCheck fill:#ffebee,stroke:#c62828
 style NameCheck fill:#ffebee,stroke:#c62828
 style DemandCheck fill:#ffebee,stroke:#c62828
 ```
+---
+
 Few Comments about the current pipeline : 
 
 - **Automation** : As "staff_availibility.csv" is based on template from google forms export csv the whole pipeline can be automate using google api for upload result from the form and launch a new form.
