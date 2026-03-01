@@ -19,9 +19,5 @@ dist/
 .DS_Store
 Thumbs.db
 
-# --- Data & Logs (Manager specific) ---
-# We keep the folder structure, but ignore the actual generated reports
-logs/*.log
-
 # --- VS Code ---
 .vscode/
