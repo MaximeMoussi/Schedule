@@ -111,7 +111,7 @@ end
 subgraph OptimizerLayer ["OptimizerManager"]
     ReadyToSolve --> Opti_Init[Initialize OptimizerManager] 
     Opti_Init[Initialize OptimizerManager] --> Setup[Build Math Model]
-    Setup --> Solve[Pulp / Gurobi Solve]
+    Setup --> Solve[Pulp Solve]
 end
 
 subgraph ReportingLayer ["ReportingManager"]
