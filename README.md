@@ -6,8 +6,7 @@ This project implements a workforce scheduling system formulated as a Binary Int
 The system models staff availability, role requirements, operational constraints and soft penalties to generate an optimal weekly schedule under business (various) constraints needs.
 
 ## Mathematical Formulation
-<img width="909" height="1222" alt="image" src="https://github.com/user-attachments/assets/043b5794-c0c3-461a-aaf0-361940211272" />
-
+![Mathematical Formulation](https://github.com/MaximeMoussi/Schedule/blob/main/Mathprog.png)
 ## Project Structure 
 ```
 ├── config.yaml                # Central configuration file
