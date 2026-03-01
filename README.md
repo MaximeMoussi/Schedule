@@ -6,16 +6,17 @@ This project implements a workforce scheduling system formulated as a Binary Int
 The system models staff availability, role requirements, operational constraints and soft penalties to generate an optimal weekly schedule under business (various) constraints needs.
 
 ## Mathematical Formulation
+<img width="909" height="1222" alt="image" src="https://github.com/user-attachments/assets/043b5794-c0c3-461a-aaf0-361940211272" />
 
 ## Project Structure 
-
+```
 ├── config.yaml                # Central configuration file
-├── requirements.txt
+├── requirements.txt           # Python dependencies
 │
 ├── data/                      # Input CSV files
-│   ├── staff_availability.csv
-│   ├── need_for_staff.csv
-│   └── staff_register.csv
+│   ├── staff_availability.csv # Employee availability data
+│   ├── need_for_staff.csv     # Staffing requirements per shift
+│   └── staff_register.csv     # Employee master data
 │
 ├── outputs/                   # Generated outputs
 │   ├── Weekly_Staff_Schedule.xlsx
@@ -24,20 +25,23 @@ The system models staff availability, role requirements, operational constraints
 │   └── Shortage_Report.txt
 │
 ├── logs/
-│   └── staff_scheduler.log
+│   └── staff_scheduler.log    # Application logs
 │
 └── src/
-    ├── main.py
-    ├── optimizer.py
-    ├── db_manager.py
-    ├── reporting_manager.py
-    ├── ui_manager.py
-    └── utility.py
-
+    ├── main.py                # Application entry point
+    ├── optimizer_manager.py   # Scheduling optimization logic (BIP/MIP)
+    ├── db_manager.py          # Data loading and management
+    ├── reporting_manager.py   # Excel/PDF report generation
+    ├── ui_manager.py          # User interface logic
+    └── utility.py             # Helper functions
+```
 
 ### data : 
 
-Code is based on 3 data source : staff_availability.csv (change weekly based on new availability based on Google form csv format), need_for_staff.csv (template of demand for each shift and each role that can be adapt weekly inside the UI), staff_register.csv (information about each worker that can be adapt weekly inside the UI).  
+Code is based on 3 data source : 
+- staff_availability.csv (change weekly based on new availability based on Google form csv format)
+- need_for_staff.csv (template of demand for each shift and each role that can be adapt weekly inside the UI)
+- staff_register.csv (information about each worker that can be adapt weekly inside the UI).  
 
 The expected data format is checked using the config file that contains the headers of the csv 
 
@@ -47,8 +51,7 @@ A report of eventual errors, modification of db and various information about th
 
 ### outputs : 
 - Shortage_Report.txt : a simple report with the missing role for each shift.  
-- Proposed_Staff_Schedule.xlsx : a first version that represent the proposed scheduling with the possibility for the user to make change in function of its preference.
-- Weekly_Staff_Schedule.xlsx : final excel schedule with the possible modification from users.
+- Weekly_Staff_Schedule.xlsx : final excel schedule.
 - Weekly_Staff_Schedule.pdf : the schedule format to pdf.
 
 ### src : 
