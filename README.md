@@ -62,15 +62,20 @@ General Idea : the choice of the stack can be changed as long as each class impl
 - UiManager : use FreeSimpleUI and handle collection of new datas 
 
 ## Running the Project 
+```
  1- Create venv with requirements.txt : python -m venv .venv 
  2- Activate : .venv\Scripts\activate 
  3- Populate venv : pip install -r requirements.txt
  4- Running the code : python src/main.py
-
+```
 
 ## Future Improvements 
  1 - Other constraints are possibles : incompatibility between two woerkers that cannot be scheduled to the same shift
+ 
  2 - New type of Optimizer : BIP is not the only possible way to solve the problem in an exact manner (ex: CP). Also, for larger problem with more constraints and/or more ppl excat approach will become untractable thus the implementation of approximate algorithm such as Grasp algorithm will be nice. 
+ 
  3 - Other objectives are possibles : we can add fairness constraint between the different workers based on various criteria (the worker the more available have priority, the assignement need to minimize the STD between workers etc... )
+ 
  4 - Testing : while we catch the errors in the logger, the most clean way to do will be to add Unit test
+ 
  5 - UI : Switch this simple pratical UI to something nicer and more user friendly.
