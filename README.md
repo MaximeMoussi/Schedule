@@ -124,7 +124,7 @@ General Idea : the choice of the stack can be changed as long as each class impl
 flowchart TD
 
 
-Upload((fa:fa-file-csv User updates<br/>availability.csv)) -.-> Start([Start Program])
+Upload((fa:fa-file-csv User updates<br/>staff_availability.csv)) -.-> Start([Start Program])
 
 
 Start --> DB_Init[Initialize DBManager]
