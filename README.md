@@ -207,7 +207,7 @@ Few Comments about the current pipeline :
 
 ## Running the Project 
 ```
- 1- Create venv with requirements.txt : python -m venv .venv 
+ 1- Create venv : python -m venv .venv 
  2- Activate : .venv\Scripts\activate 
  3- Populate venv : pip install -r requirements.txt
  4- Running the code : python src/main.py
