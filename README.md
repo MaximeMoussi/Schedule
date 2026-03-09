@@ -6,7 +6,7 @@ This project implements a workforce scheduling system formulated as a Binary Int
 The system models staff availability, role requirements, operational constraints and soft penalties to generate an optimal weekly schedule under business (various) constraints needs.
 
 ## Mathematical Formulation
-![Mathematical Formulation](https://github.com/MaximeMoussi/Schedule/blob/main/Mathprog.png)
+![Mathematical Formulation](https://github.com/MaximeMoussi/Schedule/blob/main/formulation.png)
 ---
 **General Idea** : In order to avoid infeasibility issue we penalize the objective using slack variables. The slack variables are then reported in the Shortage_Report.txt
 - **Other constraints** :The problem is fairly simple but the business case didn't need any other type of constraint such as Incompatibility between two workers, minimum time between two shifts etc ... 
