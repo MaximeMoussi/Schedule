@@ -201,8 +201,8 @@ style DemandCheck fill:#ffebee,stroke:#c62828
 
 Few Comments about the current pipeline : 
 
-- **Automation** : As "staff_availibility.csv" is based on template from google forms export csv the whole pipeline can be automated using google api for upload result from the form and launch a new form.
-- **GUI** : While operationnal using FreeSimpleGui is not the more convenient for user interface and visualization of dataframes like staff_register or need_for_staff. Typically, an interface based on Html and CSS will be more handy.
+- **Automation** : As "staff_availibility.csv" is based on template from google forms export csv, the whole pipeline can be automated using google api for upload result from the form and launch a new form.
+- **GUI** : While operationnal, using FreeSimpleGui is not the more convenient for user interface and visualization of dataframes like staff_register or need_for_staff. Typically, an interface based on Html and CSS will be more handy.
 - **Feedback loop from user** : What is currently missing is a feedback loop with the user about the proposed solutions handle by the **ReportingManager** class. 
 
 ## Running the Project 
